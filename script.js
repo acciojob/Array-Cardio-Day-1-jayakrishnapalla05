@@ -29,13 +29,16 @@ const people = [
 // Array.prototype.filter()
 // 1. Filter the list of inventors for those who were born in the 1500's and return the filtered array
 export function myfilter() {
-
+ let ans=inventors.filter(item => item.year>=1500 && item.year<1600);
+	return ans;
 }
 
 // Array.prototype.map()
 // 2. Give us an array of the inventor first and last names (i.e. full name)
 // Ex: For the first inventor the full name will be 'Albert Einstein'
 export function map() {
+	let fullname=inventors.map(item => `${item.first} ${last}`);
+	return fullname;
 
 }
 
@@ -43,6 +46,8 @@ export function map() {
 // Array.prototype.sort()
 // 3. Sort the inventors by birthdate, oldest to youngest and return the sorted array
 export function sort() {
+	let sorted=inventors.sort((a,b) => b.year-a.year);
+	return sorted;
 
 }
 
@@ -51,17 +56,24 @@ export function sort() {
 // 4. How many years did all the inventors live?
 // Return the total number of years all the inventors lived
 export function reduce() {
+	let livedyears=inventors.reduce((total, item){
+		return total+(item.passed-item.year);
+	},0)
+	return livedyears;
 
 }
 
 // 5. Sort the inventors by years lived and return the sorted array
 export function sortbylived() {
+	let lived=inventors.sort((a,b) => (a.passed-a.year)-(b.passed-b.year));
+	return lived;
 
 }
 
 // 6. sort Exercise
 // Sort the people alphabetically by last name and return the sorted array
 export function sortByLastName() {
+	let lastName=inventors.sort((a,b) => a.last-b.last);
 
 }
 
@@ -71,4 +83,15 @@ const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bik
 
 export function reducedSum() {
     // Return an object containing transports as key and its number of occurances as the key's value
+	const transportCounts = new Map();
+  
+  data.forEach(transport => {
+    if (transportCounts.has(transport)) {
+      transportCounts.set(transport, transportCounts.get(transport) + 1);
+    } else {
+      transportCounts.set(transport, 1);
+    }
+  });
+
+  return Object.fromEntries(transportCounts);
 }
